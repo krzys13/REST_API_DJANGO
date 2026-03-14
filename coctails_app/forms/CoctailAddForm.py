@@ -1,6 +1,6 @@
 from django import forms
 
-class AddCoctailForm(forms.Form):
+class CoctailAddForm(forms.Form):
     name = forms.CharField(max_length=100, label='Nazwa koktajlu')
     category = forms.CharField(max_length=100, label='Kategoria')
     instructions = forms.CharField(widget=forms.Textarea, label='Instrukcje')
