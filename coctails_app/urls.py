@@ -1,11 +1,26 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
-from . import views
+from .views import (
+    CategoryViewSet,
+    IngredientViewSet,
+    CocktailViewSet,
+    CocktailIngredientViewSet,
+    UserList,
+    UserDetail
+    
+)
+from django.urls import path, include
 
-urlpatterns = [
-    path("coctail/", views.coctail_list, name="coctail_list"),
-    path("coctail/<int:coctail_id>/detail", views.coctail_detail, name = "coctail_detail"),
-    path("coctail/create", views.coctail_create, name="coctail_create"),
-    path("coctail/insert", views.coctail_insert, name="coctail_insert"),
-    #path("coctail/<int:coctail_id>/edit", views.coctail_edit, name = "coctail_edit"),
-]
+
+router = DefaultRouter()
+
+router.register("categories", CategoryViewSet)
+router.register("ingredients", IngredientViewSet)
+router.register("cocktails", CocktailViewSet)
+router.register("cocktail-ingredients", CocktailIngredientViewSet)
+
+urlpatterns = router.urls + [
+    path("users/", UserList.as_view()),
+    path("users/<int:pk>/", UserDetail.as_view()),
+    path("api-auth/", include("rest_framework.urls")),
+    ]

@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True, null=False, blank=False)
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -11,8 +11,8 @@ class Category(models.Model):
 
 
 class Ingredient(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=100, unique=True, blank=False)
+    description = models.TextField(blank=False, null=False, help_text="Description of the ingredient for example: 2x 50ml)")
     image = models.URLField(blank=True, null=True)
 
     class Meta:
@@ -23,12 +23,12 @@ class Ingredient(models.Model):
 
 
 class Cocktail(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True, null=False, blank=False, help_text="Name of the cocktail")
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
+        blank=True,
         null=True,
-        blank=True
     )
     instructions = models.TextField()
     ingredients = models.ManyToManyField(
@@ -36,6 +36,8 @@ class Cocktail(models.Model):
         through='CocktailIngredient'
     )
     is_alcoholic = models.BooleanField(default=True)
+
+    author= models.ForeignKey("auth.User", related_name="cocktails", on_delete=models.SET_NULL, null=True, blank=True)
     
     class Meta:
         verbose_name_plural = "Cocktails"
