@@ -9,6 +9,8 @@ venv/
 env/
 ENV/
 
+# Migrations
+*/migrations/
 # Django local files
 db.sqlite3
 local_settings.py
