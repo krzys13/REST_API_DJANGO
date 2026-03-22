@@ -7,8 +7,7 @@ Zaimplementowano następujące elementy:
 - relacyjną bazę danych
 - paginację przy listowaniu koktajli oraz składników
 - walidację danych wejściowych: przy tworzeniu obiektów jak i filtorwaniu w endpointach
-
--Autoryzację oraz użytkowników:
+- autoryzację oraz użytkowników:
   - system rejestracji i logowania mechanizmem wbudowanym w Django
   - role użytkowników:
     - użytkownik
